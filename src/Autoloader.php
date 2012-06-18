@@ -50,7 +50,7 @@ class Autoloader
 	 * @param array|string $name All the namespaces if is array, if this is a string the namespace name
 	 * @param string       $path Optoinal The path of the namespace
 	 */
-	public function setNamespaces( $name, $path = null )
+	public function setNamespaces($name, $path = null)
 	{
 		if (is_array($name) && (null === $path)) {
 			$this->namespaces = $name;

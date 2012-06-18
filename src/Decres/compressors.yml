@@ -1,0 +1,3 @@
+CSScompressor:
+    extesion: .css
+    class: Decres\Compressor\CSScompressor

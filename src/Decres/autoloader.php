@@ -106,10 +106,10 @@ class Autoloader
 	 */
 	public function loadClass($className)
 	{
-		$file = $this->getFilePath($className);
+		$file = $this->base.$this->getFilePath($className);
 
 		if(file_exists($file)) {
-			require_once $this->base.$file;
+			require_once $file;
 		}
 	}
 

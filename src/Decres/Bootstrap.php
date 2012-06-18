@@ -9,12 +9,14 @@
  */
 
 
-define('SRC_ROOT', __DIR__.DIRECTORY_SEPARATOR);
-define('ROOT', realpath(__DIR__.'/../').DIRECTORY_SEPARATOR);
+define('SRC_ROOT', realpath(__DIR__.'/../').DIRECTORY_SEPARATOR);
+define('ROOT', realpath(__DIR__.'/../../').DIRECTORY_SEPARATOR);
 
-require_once SRC_ROOT.'autoloader.php';
+require_once SRC_ROOT.'Decres/autoloader.php';
+
+use Decres\Autoloader;
 
 $classloader = new Autoloader();
-$classloader->setNamespace('Symfony\Component\Yaml', 'vendor\Yaml');
+$classloader->setNamespaces('Symfony\Component\Yaml', 'vendor\Yaml');
 $classloader->setBaseDir(SRC_ROOT);
 $classloader->register();

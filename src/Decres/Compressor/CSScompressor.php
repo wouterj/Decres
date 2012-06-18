@@ -11,7 +11,7 @@
 
 namespace Decres\Compressor;
 
-class CSScompressor extends CompressorInterface
+class CSScompressor implements CompressorInterface
 {
     /**
      * Remove the CSS comments
@@ -45,7 +45,7 @@ class CSScompressor extends CompressorInterface
         // .*    = spaces or new lines between last value and closing brace
         // (?=}) = }
         // /s    = dotall (. matches new line characters)
-		return preg_replace('/\;.*(?=})/s', '}', $str);
+		return preg_replace('/\;.*(?=})/s', '', $str);
     }
 
     /**
@@ -56,20 +56,30 @@ class CSScompressor extends CompressorInterface
      */
     public function removeWhitespace($str)
     {
+        // remove new lines
+        //
+        // \R = linebreaks (\n, \r, \n\r)
+		$str = preg_replace('/\R/s', '', $str);
+
         // capture all properties and values in a declaration block
 		$str = preg_replace_callback('/({.*?})/s', function( $match ) {
             // capture everything between ; and :
-			return preg_replace_callback('/(;.*?:)/', function( $m ) {
+			$s = preg_replace_callback('/(;.*?(:|}))/', function( $m ) {
                 // remove whitespace
 				return preg_replace('/\s/s', '', $m[1]);
 			}, $match[1]);
+
+            // capture everything between { and the first property
+			$s = preg_replace_callback('/({.*?\w)/', function( $m ) {
+                // remove whitespace
+				return preg_replace('/\s/s', '', $m[1]);
+			}, $s);
+
+            return $s;
 		}, $str);
 
-        // remove new lines
-		$str = preg_replace('/[\n\r\t]/s', '', $str);
-
-        // remove whitespace between name and value
-        return preg_replace('/:\s*/', ':', $str);
+        // remove whitespace around :
+        return preg_replace('/\s*:\s*/', ':', $str);
     }
 
     public function compress($str)

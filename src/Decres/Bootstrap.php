@@ -15,5 +15,6 @@ define('ROOT', realpath(__DIR__.'/../').DIRECTORY_SEPARATOR);
 require_once SRC_ROOT.'autoloader.php';
 
 $classloader = new Autoloader();
+$classloader->setNamespace('Symfony\Component\Yaml', 'vendor\Yaml');
 $classloader->setBaseDir(SRC_ROOT);
 $classloader->register();

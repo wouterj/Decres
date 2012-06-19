@@ -30,9 +30,11 @@ class CompressCommand extends Command
     {
         parent::__construct();
 
+        // parse compressors config
         $yaml = new Yaml();
         $compressors = $yaml->parse(ROOT.'config/compressors.yml');
         
+        // save all compressors
         $this->config = new Config(
                             array_map(function($compressor) {
                                 return new Compressor($compressor['class'], $compressor['extensions']);
@@ -55,7 +57,7 @@ class CompressCommand extends Command
 
         $files = $finder->files()->in(PROJECT_ROOT);
 
-        // ignore files which are ingnored by .gitignore
+        // ignore files which are ingnored by .gitignore when --no-gitignore is not set
         if (!$input->getOption('no-gitignore') && file_exists(PROJECT_ROOT.'.gitignore')) {
             foreach (file(PROJECT_ROOT.'.gitignore') as $line) {
                 $files->notName(trim($line));

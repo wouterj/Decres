@@ -19,11 +19,13 @@ use Decres\Autoloader;
 
 $classloader = new Autoloader();
 $classloader->setNamespaces(array(
-    'Symfony\Component\Yaml' => 'vendor\Yaml',
-    'Symfony\Component\Finder' => 'vendor\Finder',
-    'Symfony\Component\Console' => 'vendor/Console',
+    'Decres' => 'src\Decres',
+
+    'Symfony\Component\Yaml' => 'src\vendor\Yaml',
+    'Symfony\Component\Finder' => 'src\vendor\Finder',
+    'Symfony\Component\Console' => 'src\vendor/Console',
 ));
 
-$classloader->setBaseDir(SRC_ROOT);
+$classloader->setBaseDir(ROOT);
 
 $classloader->register();

@@ -17,6 +17,9 @@ require_once SRC_ROOT.'Decres/autoloader.php';
 use Decres\Autoloader;
 
 $classloader = new Autoloader();
-$classloader->setNamespaces('Symfony\Component\Yaml', 'vendor\Yaml');
+$classloader->setNamespaces(array(
+    'Symfony\Component\Yaml', 'vendor\Yaml',
+    'Symfony\component\Finder' => 'vendor\Finder',
+));
 $classloader->setBaseDir(SRC_ROOT);
 $classloader->register();

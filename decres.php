@@ -3,7 +3,7 @@
 
 require_once __DIR__.'/src/Decres/Bootstrap.php';
 
-use Decres\Application;
+use Decres\Console\Application;
 
-$app = new Application();
-$app->run();
+$application = new Application();
+$application->run();

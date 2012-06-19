@@ -8,29 +8,28 @@
  * @version 1.0
  */
 
-namespace Decres;
+namespace Decres\Console\Command;
 
-use Decres\Config\config;
+use Decres\Config\Config;
 use Decres\Compressor\Compressor;
+
 use Symfony\Component\Yaml\Yaml;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 
-/**
- * The main class of this project
- *
- * @author Wouter J
- */
-class Application
+class CompressCommand extends Command
 {
     protected $config;
 
-    /**
-     * Constructor.
-     *
-     * Get all registered compressors and load them into the config object
-     */
     public function __construct()
     {
+        parent::__construct();
+
         $yaml = new Yaml();
         $compressors = $yaml->parse(ROOT.'config/compressors.yml');
         
@@ -41,12 +40,15 @@ class Application
                                   );
     }
 
-    /**
-     * Begin compressing the project
-     *
-     * @todo add option for use of .gitignore
-     */
-    public function run()
+    protected function configure()
+    {
+        $this
+            ->setName('compress')
+            ->setDescription('Compress a file or a project')
+            ->addOption('no-gitignore', null, InputOption::VALUE_NONE, 'Do not use the gitignore file to ignore files');
+    }
+
+    public function execute(InputInterface $input, OutputInterface $output)
     {
         // find all files in the project
         $finder = new Finder();
@@ -54,7 +56,7 @@ class Application
         $files = $finder->files()->in(PROJECT_ROOT);
 
         // ignore files which are ingnored by .gitignore
-        if (file_exists(PROJECT_ROOT.'.gitignore')) {
+        if (!$input->getOption('no-gitignore') && file_exists(PROJECT_ROOT.'.gitignore')) {
             foreach (file(PROJECT_ROOT.'.gitignore') as $line) {
                 $files->notName(trim($line));
             }
@@ -63,7 +65,7 @@ class Application
         // compress the files
         foreach ($files as $file) {
             $compressor = $this->config->findCompressor(pathinfo($file->getFilename(), PATHINFO_EXTENSION));
-            var_dump($compressor->compress(file_get_contents($file->getRealpath())));
+            $output->writeln($compressor->compress(file_get_contents($file->getRealpath())));
         }
     }
 }

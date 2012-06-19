@@ -21,6 +21,7 @@ $classloader = new Autoloader();
 $classloader->setNamespaces(array(
     'Symfony\Component\Yaml' => 'vendor\Yaml',
     'Symfony\Component\Finder' => 'vendor\Finder',
+    'Symfony\Component\Console' => 'vendor/Console',
 ));
 
 $classloader->setBaseDir(SRC_ROOT);

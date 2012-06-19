@@ -15,6 +15,7 @@ use Decres\Compressor\Compressor;
 
 use Symfony\Component\Yaml\Yaml;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
@@ -47,11 +48,14 @@ class CompressCommand extends Command
         $this
             ->setName('compress')
             ->setDescription('Compress a file or a project')
-            ->addOption('no-gitignore', null, InputOption::VALUE_NONE, 'Do not use the gitignore file to ignore files');
+            ->addOption('no-gitignore', null, InputOption::VALUE_NONE, 'Do not use the gitignore file to ignore files')
+            ->addArgument('output', InputArgument::OPTIONAL, 'The folder where the compressed files should be stored', 'public');
     }
 
     public function execute(InputInterface $input, OutputInterface $output)
     {
+        $filesystem = new Filesystem();
+
         // find all files in the project
         $finder = new Finder();
 
@@ -64,10 +68,20 @@ class CompressCommand extends Command
             }
         }
 
+        $filesystem->mkdir($input->getArgument('output'));
+
         // compress the files
         foreach ($files as $file) {
             $compressor = $this->config->findCompressor(pathinfo($file->getFilename(), PATHINFO_EXTENSION));
-            $output->writeln($compressor->compress(file_get_contents($file->getRealpath())));
+
+            // compress file
+            $newFileContent = $compressor->compress(file_get_contents($file->getRealpath()));
+            $newFileLoc = PROJECT_ROOT.$input->getArgument('output').DIRECTORY_SEPARATOR.$file->getFilename();
+
+            var_dump($newFileLoc);
+            // create new file
+            $filesystem->touch($newFileLoc);
+            file_put_contents($newFileLoc, $newFileContent);
         }
     }
 }

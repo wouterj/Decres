@@ -1,3 +1,7 @@
 CSScompressor:
     extensions: css
     class: Decres\Compressor\CSScompressor
+
+HTMLcompressor:
+    extensions: [html, htm]
+    class: Decres\Compressor\HTMLcompressor

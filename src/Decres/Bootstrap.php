@@ -23,7 +23,8 @@ $classloader->setNamespaces(array(
 
     'Symfony\Component\Yaml' => 'src\vendor\Yaml',
     'Symfony\Component\Finder' => 'src\vendor\Finder',
-    'Symfony\Component\Console' => 'src\vendor/Console',
+    'Symfony\component\Filesystem' => 'sc\vendor\Finder',
+    'Symfony\Component\Console' => 'src\vendor\Console',
 ));
 
 $classloader->setBaseDir(ROOT);

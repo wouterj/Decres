@@ -35,23 +35,38 @@ class CSScompressor implements CompressorInterface
      * Remove the last semicolon of a declaration block
      *
      * @param  string $str The code
+     * 
      * @return string
      */
     public function removeLastSemicolon($str)
     {
-        // change foo: bar; } into foo: bar }
+        // change `foo: bar; }` into `foo: bar }`
         //
         // \;    = ;
         // .*    = spaces or new lines between last value and closing brace
         // (?=}) = }
         // /s    = dotall (. matches new line characters)
-		return preg_replace('/\;.*(?=})/s', '', $str);
+		return preg_replace('/\;\W*(?=})/s', '', $str);
+    }
+
+    /**
+     * Remove spaces around commas in selector
+     *
+     * @param  string $str The code
+     *
+     * @return string
+     */
+    public function removeSpacesInSelector($str)
+    {
+        // change `body, html` into `body,html`
+        return preg_replace('/\s*,\s*/', ',', $str);
     }
 
     /**
      * Remove the whitespace
      *
      * @param  string $str The code
+     *
      * @return string
      */
     public function removeWhitespace($str)
@@ -87,6 +102,7 @@ class CSScompressor implements CompressorInterface
         $str = $this->removeComments($str);
         $str = $this->removeLastSemicolon($str);
         $str = $this->removeWhitespace($str);
+        $str = $this->removeSpacesInSelector($str);
 
         return $str;
     }

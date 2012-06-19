@@ -17,25 +17,20 @@ namespace Decres\Compressor;
  */
 class Compressor
 {
-    protected $compressor;
+    protected $compressorName;
     protected $extensions;
 
     /**
      * Constructor.
      *
-     * @param Decres\Compressor\CompressorInterface $compressor The compressor which needs to be hold
-     * @param array|string                          $extensions The extensions which match this compressor
+     * @param array         $compressor The name of the compressor
+     * @param array|string  $extensions The extensions which match this compressor
      *
      * @throws \InvalidArgumentException When $compressor is of a wrong instance
      */
     public function __construct($compressor, $extensions)
     {
-        if (!$compressor instanceof CompressorInterface) {
-            throw new \InvalidArgumentException(sprintf('The first argument of Compressor::__construct() needs to be an instance of Decres\Compressor\CompressorInterface, %s given',
-                                                       get_class($compressor)));
-        }
-
-        $this->compressor = $compressor;
+        $this->compressorName = $compressor;
         $this->extensions = (is_array($extensions)
                                 ? $extensions
                                 : array($extensions)
@@ -59,6 +54,8 @@ class Compressor
      */
     public function getCompressor()
     {
-        return $this->compressor;
+        $compressorClass = $this->compressorName;
+
+        return new $compressorClass();
     }
 }

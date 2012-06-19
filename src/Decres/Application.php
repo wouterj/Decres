@@ -13,7 +13,7 @@ namespace Decres;
 use Decres\Config\config;
 use Decres\Compressor\Compressor;
 use Symfony\Component\Yaml\Yaml;
-use Symfony\component\Finder\Finder;
+use Symfony\Component\Finder\Finder;
 
 /**
  * The main class of this project
@@ -36,17 +36,34 @@ class Application
         
         $this->config = new Config(
                             array_map(function($compressor) {
-                                return new Compressor($compressor);
+                                return new Compressor($compressor['class'], $compressor['extensions']);
                             }, $compressors)
                                   );
     }
 
     /**
      * Begin compressing the project
+     *
+     * @todo add option for use of .gitignore
      */
     public function run()
     {
+        // find all files in the project
         $finder = new Finder();
-        var_dump($finder->files()->in(__DIR__);
+
+        $files = $finder->files()->in(PROJECT_ROOT);
+
+        // ignore files which are ingnored by .gitignore
+        if (file_exists(PROJECT_ROOT.'.gitignore')) {
+            foreach (file(PROJECT_ROOT.'.gitignore') as $line) {
+                $files->notName(trim($line));
+            }
+        }
+
+        // compress the files
+        foreach ($files as $file) {
+            $compressor = $this->config->findCompressor(pathinfo($file->getFilename(), PATHINFO_EXTENSION));
+            var_dump($compressor->compress(file_get_contents($file->getRealpath())));
+        }
     }
 }

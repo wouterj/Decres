@@ -10,6 +10,8 @@
 
 namespace Decres\Config;
 
+use Decres\Compressor\EmptyCompressor;
+
 class Config
 {
     protected $compressors;
@@ -52,6 +54,8 @@ class Config
         {
             if ($compressor->match($extension)) {
                 return $compressor->getCompressor();
+            } else {
+                return new EmptyCompressor();
             }
         }
     }

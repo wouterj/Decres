@@ -9,6 +9,7 @@
  */
 
 
+define('PROJECT_ROOT', getcwd().DIRECTORY_SEPARATOR);
 define('SRC_ROOT', realpath(__DIR__.'/../').DIRECTORY_SEPARATOR);
 define('ROOT', realpath(__DIR__.'/../../').DIRECTORY_SEPARATOR);
 
@@ -18,8 +19,10 @@ use Decres\Autoloader;
 
 $classloader = new Autoloader();
 $classloader->setNamespaces(array(
-    'Symfony\Component\Yaml', 'vendor\Yaml',
-    'Symfony\component\Finder' => 'vendor\Finder',
+    'Symfony\Component\Yaml' => 'vendor\Yaml',
+    'Symfony\Component\Finder' => 'vendor\Finder',
 ));
+
 $classloader->setBaseDir(SRC_ROOT);
+
 $classloader->register();

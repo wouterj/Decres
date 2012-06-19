@@ -23,7 +23,7 @@ $classloader->setNamespaces(array(
 
     'Symfony\Component\Yaml' => 'src\vendor\Yaml',
     'Symfony\Component\Finder' => 'src\vendor\Finder',
-    'Symfony\component\Filesystem' => 'sc\vendor\Finder',
+    'Symfony\Component\Filesystem' => 'src\vendor\Filesystem',
     'Symfony\Component\Console' => 'src\vendor\Console',
 ));
 

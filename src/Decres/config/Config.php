@@ -54,9 +54,8 @@ class Config
         {
             if ($compressor->match($extension)) {
                 return $compressor->getCompressor();
-            } else {
-                return new EmptyCompressor();
             }
         }
+        return new EmptyCompressor();
     }
 }

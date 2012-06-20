@@ -38,4 +38,46 @@ class CSScompressorTest extends \PHPUnit_Framework_TestCase
     }'));
         $this->assertEquals('{foo:1px bar;}', $this->compressor->removeWhitespace('{foo : 1px bar;}'));
     }
+
+    /**
+     * Test everything
+     *
+     * Skip this test as long as the TODO isn't fixed
+     *
+     * @see Decres\Compressor\CSScompressor::removeWhitespace()
+     */
+    public function testEverything()
+    {
+        $this->markTestSkipped('TODO needs to be fixed first');
+        $input = <<<CSS
+/*!
+ * This is a test stylesheet created by Wouter J
+ */
+/* Some reset */
+html, body
+{
+    width: 100%;
+    height: 100%;
+}
+* {
+    margin: 0;
+    padding: 0;
+    border: 1px solid #000;
+}
+
+/* Header */
+header h1    {
+    font-size: 20pt;
+    color: #666;
+}
+CSS;
+        $expected = <<<CSS
+/*!
+ * This is a test stylesheet created by Wouter J
+ */
+html,body{width:100%;height:100%}*{margin:0;padding:0;border:1px solid #000}header h1{font-size:20pt;color: #666}
+CSS;
+
+        $this->assertEquals($expected, $this->compressor->compress($input));
+    }
 }

@@ -68,6 +68,8 @@ class CSScompressor implements CompressorInterface
      * @param  string $str The code
      *
      * @return string
+     *
+     * @todo don't remove newlines inside important comments
      */
     public function removeWhitespace($str)
     {

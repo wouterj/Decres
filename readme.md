@@ -25,3 +25,8 @@ Voordat je met Decres aan de slag kunt moet je de map waarin het Decres project 
 Heb je een fout ontdekt, of zou je graag iets willen zien (bijv. een nieuwe compressor)? Dan kun je dat aangeven in [het issues gedeelte](https://github.com/WouterJ/Decres/issues).
 
 Heb je zelf al een compressor geschreven en wil je die aan dit project toevoegen? Of heb je je eigen fout weten op te lossen door de broncode te bewerken? In dat geval kun je via Github en GIT dit project forken, aanpassen en dan een Pull Request aanvragen.
+
+Wat regels voordat je een compressor toevoegd:
+
+ - Als je iets aanpast of iets toevoegd, maak daar dan een aparte branch voor. Dat maakt het voor mij makkelijker om hierin te voegen
+ - Als je je eigen compressors schrijft, plak die dan in een eigen directory in de `src/vendor` map. Zorg dat de namespace overeenkomt met het path. Voeg eventueel je namespace toe aan de autoloader in `Bootstrap.php`, zodat je niet je namespace met 'src\vendor' hoeft te beginnen.

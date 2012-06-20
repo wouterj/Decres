@@ -20,11 +20,8 @@ use Decres\Autoloader;
 $classloader = new Autoloader();
 $classloader->setNamespaces(array(
     'Decres' => 'src\Decres',
-
-    'Symfony\Component\Yaml' => 'src\vendor\Yaml',
-    'Symfony\Component\Finder' => 'src\vendor\Finder',
-    'Symfony\Component\Filesystem' => 'src\vendor\Filesystem',
-    'Symfony\Component\Console' => 'src\vendor\Console',
+    'Symfony\Component' => 'src\vendor',
+    'WouterJ' => 'src\vendor\WouterJ',
 ));
 
 $classloader->setBaseDir(ROOT);

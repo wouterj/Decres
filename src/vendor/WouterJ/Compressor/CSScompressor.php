@@ -9,7 +9,9 @@
  */
 
 
-namespace Decres\Compressor;
+namespace WouterJ\Compressor;
+
+use Decres\Compressor\CompressorInterface;
 
 class CSScompressor implements CompressorInterface
 {

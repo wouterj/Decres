@@ -2,7 +2,7 @@
 
 namespace Decres\Tests\Compressor;
 
-use Decres\Compressor\HTMLcompressor;
+use WouterJ\Compressor\HTMLcompressor;
 
 class HTMLcompressorTest extends \PHPUnit_Framework_TestCase
 {

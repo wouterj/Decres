@@ -15,9 +15,6 @@ class HTMLcompressor implements CompressorInterface
 {
     /**
      * Remove the HTML comments
-     *
-     * @param  string $str The code
-     * @return string
      */
     public function removeComments($str)
     {
@@ -35,10 +32,6 @@ class HTMLcompressor implements CompressorInterface
 
     /**
      * Remove the whitespace
-     *
-     * @param  string $str The code
-     *
-     * @return string
      */
     public function removeWhitespace($str)
     {
@@ -56,10 +49,6 @@ class HTMLcompressor implements CompressorInterface
      * Remove optional start and end tags
      *
      * @link http://youtu.be/WxmcDoAxdoY?t=16m11s
-     *
-     * @param string $str The code
-     *
-     * @return string
      */
     public function removeOptionalTags($str)
     {

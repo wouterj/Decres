@@ -15,9 +15,6 @@ class CSScompressor implements CompressorInterface
 {
     /**
      * Remove the CSS comments
-     *
-     * @param  string $str The code
-     * @return string
      */
     public function removeComments($str)
     {
@@ -33,10 +30,6 @@ class CSScompressor implements CompressorInterface
 
     /**
      * Remove the last semicolon of a declaration block
-     *
-     * @param  string $str The code
-     * 
-     * @return string
      */
     public function removeLastSemicolon($str)
     {
@@ -51,10 +44,6 @@ class CSScompressor implements CompressorInterface
 
     /**
      * Remove spaces around commas in selector
-     *
-     * @param  string $str The code
-     *
-     * @return string
      */
     public function removeSpacesInSelector($str)
     {
@@ -64,10 +53,6 @@ class CSScompressor implements CompressorInterface
 
     /**
      * Remove the whitespace
-     *
-     * @param  string $str The code
-     *
-     * @return string
      *
      * @todo don't remove newlines inside important comments
      */

@@ -4,7 +4,21 @@ Welkom bij Decres. Decres is een PHP compressor engine. Dit betekend dat je met 
 
 ## Download
 
-Decres download je het makkelijkst via GIT: [current version]().
+Decres kun je downloaden door de recentste download te kiezen van de [Download pagina](https://github.com/WouterJ/Decres/tags).
+
+Een andere optie is door deze Repository te clonen, hiervoor heb je GIT nodig:
+
+    git clone http://github.com/WouterJ/Decres.git
+
+Nu zal er een map Decres worden aangemaakt op de plaats die je hebt aangegeven.
+
+### Eerste keer
+
+Voordat je met Decres aan de slag kunt moet je de map waarin het Decres project staat aan je omgevingsvariabele toevoegen. Dit doe je door `Computer > Eigenschappen > Geavanceerde systeeminstellingen > Geavanceerd > Omgevingsvariabelen > Path > bewerken` en dan `; C:\path\to\Decres` toe te voegen.
+
+> **Opmerking**
+> Aangezien Decres nu nog in de Alpha fase zit zal je zelf naar `Decres/decres.bat` moeten gaan en daar het path naar decres.php aanpassen, op de laatste lijn achter `"%PHPBIN%" "`. Ook het path naar PHP (`PHPBIN=` op lijn 2) zal je zelf moeten aanpassen.
+> Als je op een Linux of Mac computer zit moet je niet het bat bestand maar `decres.php` aanpassen, het path achter `#!` op de eerste lijn.
 
 ## Meehelpen
 

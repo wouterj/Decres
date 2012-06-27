@@ -1,0 +1,27 @@
+{
+    "name": "WouterJ/Decres",
+    "description": "Compress your project, supports as much languages as you want",
+    "keywords": ["minify", "compress", "optimalisation", "speed"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Wouter J",
+            "homepage": "http://wouterj.nl/"
+        }
+    ],
+    "config": {
+        "vendor-dir": "src/vendor",
+        "bin-dir": "src/vendor/bin"
+    },
+    "autoload": {
+        "psr-0": { "": "src/" }
+    },
+
+    "require": {
+        "php": ">=5.3.3",
+        "symfony/yaml": "2.1.*",
+        "symfony/finder": "2.1.*",
+        "symfony/filesystem": "2.1.*",
+        "symfony/console": "2.1.*"
+    }
+}
